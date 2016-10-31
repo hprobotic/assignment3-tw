@@ -23,7 +23,7 @@
     </div>
 
     <% if (typeof message !== 'undefined' && message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
+    <div class="alert alert-danger"><%= message %></div>
     <% } %>
 
     <div class="row well">
@@ -43,12 +43,16 @@
     </div>
 
     <div class="row">
-        <form action="/share/<%= post.id %>" method="POST">
-            <div class="form-group">
-                <textarea name="share" class="form-control" rows="3" placeholder="Add a personal message..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-default">Reply</button>
-        </form>
+        <% if ( post.network.name == 'twitter') { %>
+        <form action="/twitter/share/<%= post.id %>" method="POST">
+            <% } else { %>
+            <form action="/facebook/share/<%= post.id %>" method="POST">
+                <% } %>
+                <div class="form-group">
+                    <textarea name="share" class="form-control" rows="3" placeholder="Add a personal message..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-default">Reply</button>
+            </form>
     </div>
 </div>
 </body>
